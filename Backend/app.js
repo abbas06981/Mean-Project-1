@@ -1,5 +1,6 @@
 const express = require('express');
 const cors = require('cors');
+const mongoose = require('mongoose');
 
 const app = express();
 const port = 3000;
@@ -7,6 +8,13 @@ const port = 3000;
 app.use(express.json())
 app.use(cors())
 
+async function connectDB() {
+    await mongoose.connect('mongodb://127.0.0.1:27017/', {
+        dbName: 'eCommerce_Project1'
+    })
+}
+
+connectDB().then(() => console.log('Connected to DB')).catch(err => console.log(err))
 app.get('/', (req, res) => {
     res.send('Hello World!')
 })
