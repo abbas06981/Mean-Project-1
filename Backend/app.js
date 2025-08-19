@@ -2,6 +2,9 @@ const express = require('express');
 const cors = require('cors');
 const mongoose = require('mongoose');
 
+const categoryRouter = require('./routes/category')
+
+
 const app = express();
 const port = 3000;
 
@@ -13,11 +16,15 @@ async function connectDB() {
         dbName: 'eCommerce_Project1'
     })
 }
-
 connectDB().then(() => console.log('Connected to DB')).catch(err => console.log(err))
+
+
+
 app.get('/', (req, res) => {
     res.send('Hello World!')
 })
+
+app.use('/category', categoryRouter)
 
 app.listen(port, () => {
     console.log(`Server Running on port ${port}`)
