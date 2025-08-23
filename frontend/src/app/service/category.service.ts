@@ -1,9 +1,13 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class CategoryService {
-
-  constructor() { }
+  http = inject(HttpClient);
+  constructor() {}
+  getCategoryList() {
+    return this.http.get('http://localhost:3000/category');
+  }
 }
