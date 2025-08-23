@@ -10,4 +10,8 @@ export class CategoryService {
   getCategoryList() {
     return this.http.get('http://localhost:3000/category');
   }
+
+  createCategory(category: any) {
+    return this.http.post('http://localhost:3000/category', category);
+  }
 }

@@ -1,1 +1,29 @@
-<p>category-form works!</p>
+<div class="w-full px-40">
+  <h1 class="text-base text-center pt-3">Add New Category</h1>
+  <div class="p-[1px] w-full flex justify-center">
+    <form class="w-96 p-4">
+      <mat-form-field class="w-full">
+        <mat-label>Name</mat-label>
+        <input
+          name="name"
+          matInput
+          placeholder="Ex. Mia"
+          class="h-8 text-sm"
+          [(ngModel)]="name"
+        />
+      </mat-form-field>
+
+      <div class="flex justify-center w-full">
+        <button
+          mat-raised-button
+          color="accent"
+          type="button"
+          (click)="addCategory()"
+          [disabled]="!name"
+        >
+          Save
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
