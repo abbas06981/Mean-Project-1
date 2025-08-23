@@ -7,6 +7,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { CategoryService } from '../../../service/category.service';
 import { MatButton } from '@angular/material/button';
 import { RouterLink } from '@angular/router';
+import { Category } from '../../../types/category';
 
 @Component({
   selector: 'app-category',
@@ -34,24 +35,31 @@ export class CategoryComponent {
   categoryService = inject(CategoryService);
 
   constructor() {
-    this.dataSource = new MatTableDataSource([] as any);
+    this.dataSource = new MatTableDataSource([] as Category[]);
   }
 
-  ngOnInit() {
+  private getCategoryList() {
     this.categoryService.getCategoryList().subscribe((data) => {
-      this.dataSource = new MatTableDataSource(data as any);
+      this.dataSource = new MatTableDataSource(data as Category[]);
 
       // Attach paginator & sort after assigning data
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
     });
   }
+  ngOnInit() {
+    this.getCategoryList();
+  }
 
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
   }
-
+  deleteCategory(id: string) {
+    this.categoryService.deleteCategory(id).subscribe(() => {
+      this.getCategoryList();
+    });
+  }
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();

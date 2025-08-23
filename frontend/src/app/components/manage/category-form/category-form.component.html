@@ -1,5 +1,7 @@
 <div class="w-full px-40">
-  <h1 class="text-base text-center pt-3">Add New Category</h1>
+  <h1 class="text-base text-center pt-3">
+    @if (isEdit) { Edit Category } @else { Add New Category }
+  </h1>
   <div class="p-[1px] w-full flex justify-center">
     <form class="w-96 p-4">
       <mat-form-field class="w-full">
@@ -18,10 +20,10 @@
           mat-raised-button
           color="accent"
           type="button"
-          (click)="addCategory()"
+          (click)="isEdit ? updateCategory() : addCategory()"
           [disabled]="!name"
         >
-          Save
+          @if (isEdit) { Update } @else { Save }
         </button>
       </div>
     </form>
