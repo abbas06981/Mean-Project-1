@@ -1,7 +1,7 @@
 import { Routes } from '@angular/router';
 import { HomeComponent } from './components/home/home.component';
 import { CategoryComponent } from './components/manage/category/category.component';
-import { CategoryFormComponent } from './components/category-form/category-form.component';
+import { CategoryFormComponent } from './components/manage/category-form/category-form.component';
 
 export const routes: Routes = [
   {
