@@ -3,6 +3,7 @@ const cors = require('cors');
 const mongoose = require('mongoose');
 
 const categoryRouter = require('./routes/category')
+const brandRouter = require('./routes/brand')
 
 
 const app = express();
@@ -25,6 +26,7 @@ app.get('/', (req, res) => {
 })
 
 app.use('/category', categoryRouter)
+app.use('/brand', brandRouter)
 
 app.listen(port, () => {
     console.log(`Server Running on port ${port}`)
