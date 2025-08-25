@@ -5,8 +5,8 @@ const productsSchema = new Schema({
     name: String,
     shortDescription: String,
     description: String,
-    purchasePrice: Number,
-    sailingPrice: Number,
+    price: Number,
+    discount: Number,
     images: Array(String),
     categoryId: {
         type: Schema.Types.ObjectId,
