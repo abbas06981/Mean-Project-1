@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 
 const categoryRouter = require('./routes/category')
 const brandRouter = require('./routes/brand')
+const productRouter = require('./routes/product')
 
 
 const app = express();
@@ -27,6 +28,7 @@ app.get('/', (req, res) => {
 
 app.use('/category', categoryRouter)
 app.use('/brand', brandRouter)
+app.use('/product', productRouter)
 
 app.listen(port, () => {
     console.log(`Server Running on port ${port}`)
