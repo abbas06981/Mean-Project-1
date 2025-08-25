@@ -6,7 +6,7 @@ const { deleteCategory,
     updateCategory,
     patchCategory,
     getCategories,
-    getCategoryById } = require("../handler/categoryHandler");
+    getCategoryById } = require("../db/models/categoryHandler");
 
 
 router.get("", getCategories);

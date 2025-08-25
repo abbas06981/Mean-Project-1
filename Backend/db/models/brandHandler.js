@@ -1,4 +1,4 @@
-const Brands = require("../db/schemas/brand");
+const Brands = require("../schemas/brand");
 
 
 const getBrands = async (req, res) => {

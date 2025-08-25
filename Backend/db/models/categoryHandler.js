@@ -1,4 +1,4 @@
-const Category = require("../db/schemas/category");
+const Category = require("../schemas/category");
 
 const createCategory = async (req, res) => {
     try {

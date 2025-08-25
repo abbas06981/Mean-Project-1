@@ -6,7 +6,7 @@ const { getBrands,
     createBrand,
     updateBrand,
     deleteBrand
-} = require("../handler/brandHandler");
+} = require("../db/models/brandHandler");
 
 
 router.get("", getBrands);
