@@ -48,19 +48,29 @@ const deleteProduct = async (req, res) => {
 const updateProduct = async (req, res) => {
     try {
         const id = req.params.id;
+        console.log("Update request body:", req.body);
+        console.log("Update request id:", id);
+
         const updatedProduct = await Product.findByIdAndUpdate(
             id,
             { $set: req.body },
-            { new: true }
+            { new: true, runValidators: true }
         );
+
         if (!updatedProduct) {
             return res.status(404).json({ message: "Product not found" });
         }
-        res.status(200).json({ message: "Product updated successfully", product: updatedProduct });
+
+        res.status(200).json({
+            message: "Product updated successfully",
+            product: updatedProduct,
+        });
     } catch (error) {
-        res.status(500).json({ message: "Error updating product", error });
+        console.error("Update error:", error); // 👈 log full error
+        res.status(500).json({ message: "Error updating product", error: error.message });
     }
 };
+
 
 
 module.exports = {
