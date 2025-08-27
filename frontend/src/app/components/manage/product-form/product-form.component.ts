@@ -36,4 +36,8 @@ export class ProductFormComponent {
     images: [],
     categoryId: [null, [Validators.required]],
   });
+
+  addProduct() {
+    console.log(this.productForm.value);
+  }
 }

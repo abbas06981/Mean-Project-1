@@ -1,1 +1,71 @@
-<p>product-form works!</p>
+<div class="w-full">
+  <h1 class="text-base text-center pt-3">Add New Product</h1>
+  <div class="p-[1px] w-full flex justify-center">
+    <form class="w-[80%] p-4">
+      <mat-form-field class="w-full">
+        <mat-label>Name</mat-label>
+        <input name="name" matInput placeholder="Ex. Mia" class="h-8 text-sm" />
+      </mat-form-field>
+      <mat-form-field class="w-full">
+        <mat-label>Short Description</mat-label>
+        <input
+          name="shortDescription"
+          matInput
+          placeholder="write Short Description"
+          class="h-8 text-sm"
+        />
+      </mat-form-field>
+      <mat-form-field class="w-full">
+        <mat-label> Description</mat-label>
+        <textarea
+          name="description"
+          matInput
+          placeholder="write Description"
+          rows="5"
+        ></textarea>
+      </mat-form-field>
+      <mat-form-field class="w-full">
+        <mat-label>Price</mat-label>
+        <input
+          type="number"
+          name="price"
+          matInput
+          placeholder="enter price"
+          class="h-8 text-sm"
+        />
+      </mat-form-field>
+      <mat-form-field class="w-full">
+        <mat-label>Discount</mat-label>
+        <input
+          type="number"
+          name="shortDescription"
+          matInput
+          placeholder="enter discount"
+          class="h-8 text-sm"
+        />
+      </mat-form-field>
+      <div class="w-full flex flex-col">
+        <h4>Images</h4>
+        <mat-form-field class="w-full">
+          <mat-label>image 1</mat-label>
+          <input
+            name="images"
+            matInput
+            placeholder="image"
+            class="h-8 text-sm"
+          />
+        </mat-form-field>
+      </div>
+      <div class="flex justify-center w-full">
+        <button
+          mat-raised-button
+          color="accent"
+          type="button"
+          (click)="addProduct()"
+        >
+          ADD
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
