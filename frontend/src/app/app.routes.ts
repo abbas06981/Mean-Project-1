@@ -4,6 +4,8 @@ import { CategoryComponent } from './components/manage/category/category.compone
 import { CategoryFormComponent } from './components/manage/category-form/category-form.component';
 import { BrandsComponent } from './components/manage/brands/brands.component';
 import { BrandsFormComponent } from './components/manage/brands-form/brands-form.component';
+import { ProductComponent } from './components/manage/product/product.component';
+import { ProductFormComponent } from './components/manage/product-form/product-form.component';
 
 export const routes: Routes = [
   {
@@ -33,5 +35,17 @@ export const routes: Routes = [
   {
     path: 'admin/brand/:id',
     component: BrandsFormComponent,
+  },
+  {
+    path: 'admin/products',
+    component: ProductComponent,
+  },
+  {
+    path: 'admin/products/add',
+    component: ProductFormComponent,
+  },
+  {
+    path: 'admin/products/:id',
+    component: ProductFormComponent,
   },
 ];
