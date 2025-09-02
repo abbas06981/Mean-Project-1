@@ -1,69 +1,155 @@
 <div class="w-full">
   <h1 class="text-base text-center pt-3">Add New Product</h1>
   <div class="p-[1px] w-full flex justify-center">
-    <form class="w-[80%] p-4">
+    <form
+      class="w-[80%] p-4 flex flex-col gap-4"
+      [formGroup]="productForm"
+      (ngSubmit)="addProduct()"
+    >
+      <!-- Product Name -->
       <mat-form-field class="w-full">
         <mat-label>Name</mat-label>
-        <input name="name" matInput placeholder="Ex. Mia" class="h-8 text-sm" />
+        <input matInput formControlName="name" placeholder="Ex. Laptop" />
+        <mat-error
+          *ngIf="
+            productForm.get('name')?.invalid && productForm.get('name')?.touched
+          "
+        >
+          Name is required (min 5 characters).
+        </mat-error>
       </mat-form-field>
+
+      <!-- Short Description -->
       <mat-form-field class="w-full">
         <mat-label>Short Description</mat-label>
         <input
-          name="shortDescription"
           matInput
-          placeholder="write Short Description"
-          class="h-8 text-sm"
+          formControlName="shortDescription"
+          placeholder="Write short description"
         />
+        <mat-error
+          *ngIf="
+            productForm.get('shortDescription')?.invalid &&
+            productForm.get('shortDescription')?.touched
+          "
+        >
+          Short description is required (min 10 characters).
+        </mat-error>
       </mat-form-field>
+
+      <!-- Description -->
       <mat-form-field class="w-full">
-        <mat-label> Description</mat-label>
+        <mat-label>Description</mat-label>
         <textarea
-          name="description"
           matInput
-          placeholder="write Description"
+          formControlName="description"
+          placeholder="Write description"
           rows="5"
         ></textarea>
+        <mat-error
+          *ngIf="
+            productForm.get('description')?.invalid &&
+            productForm.get('description')?.touched
+          "
+        >
+          Description is required (min 50 characters).
+        </mat-error>
       </mat-form-field>
+
+      <!-- Price -->
       <mat-form-field class="w-full">
         <mat-label>Price</mat-label>
         <input
-          type="number"
-          name="price"
           matInput
-          placeholder="enter price"
-          class="h-8 text-sm"
+          type="number"
+          formControlName="price"
+          placeholder="Enter price"
         />
+        <mat-error
+          *ngIf="
+            productForm.get('price')?.invalid &&
+            productForm.get('price')?.touched
+          "
+        >
+          Price is required.
+        </mat-error>
       </mat-form-field>
+
+      <!-- Discount -->
       <mat-form-field class="w-full">
         <mat-label>Discount</mat-label>
         <input
-          type="number"
-          name="shortDescription"
           matInput
-          placeholder="enter discount"
-          class="h-8 text-sm"
+          type="number"
+          formControlName="discount"
+          placeholder="Enter discount"
         />
       </mat-form-field>
-      <div class="w-full flex flex-col">
-        <h4>Images</h4>
-        <mat-form-field class="w-full">
-          <mat-label>image 1</mat-label>
-          <input
-            name="images"
-            matInput
-            placeholder="image"
-            class="h-8 text-sm"
-          />
-        </mat-form-field>
+
+      <!-- Category -->
+      <mat-form-field class="w-full">
+        <mat-label>Category ID</mat-label>
+        <input
+          matInput
+          formControlName="categoryId"
+          placeholder="Enter category ID"
+        />
+        <mat-error
+          *ngIf="
+            productForm.get('categoryId')?.invalid &&
+            productForm.get('categoryId')?.touched
+          "
+        >
+          Category ID is required.
+        </mat-error>
+      </mat-form-field>
+      <!-- Images FormArray -->
+      <div formArrayName="images" class="flex flex-col gap-2">
+        <div class="flex justify-between items-center">
+          <h3>Product Images</h3>
+          <button
+            mat-raised-button
+            color="primary"
+            type="button"
+            (click)="addImage()"
+          >
+            Add Image
+          </button>
+        </div>
+        @for (item of images.controls; track $index) {
+        <div class="flex gap-2 items-center">
+          <mat-form-field appearance="outline" class="flex-1">
+            <mat-label>Image {{ $index + 1 }}</mat-label>
+            <input
+              matInput
+              [formControlName]="$index"
+              placeholder="Enter image URL"
+            />
+          </mat-form-field>
+
+          <button
+            mat-raised-button
+            color="warn"
+            type="button"
+            (click)="removeImage($index)"
+          >
+            Remove
+          </button>
+        </div>
+        }
       </div>
-      <div class="flex justify-center w-full">
+
+      <!-- Button to add new input -->
+
+      <!-- Submit -->
+      <div class="flex justify-center w-full mt-4">
         <button
           mat-raised-button
           color="accent"
-          type="button"
-          (click)="addProduct()"
+          type="submit"
+          [disabled]="productForm.invalid"
         >
-          ADD
+          Save Product
         </button>
       </div>
     </form>
