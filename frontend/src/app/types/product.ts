@@ -6,5 +6,6 @@ export interface Product {
   price: number;
   discount: number;
   images: string[];
-  categoryId: string; // ObjectId will come as a string in API response
+  categoryId: string;
+  brandId: string; // ObjectId will come as a string in API response
 }

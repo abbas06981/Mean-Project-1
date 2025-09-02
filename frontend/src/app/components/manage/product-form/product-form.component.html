@@ -1,11 +1,38 @@
 <div class="w-full">
-  <h1 class="text-base text-center pt-3">Add New Product</h1>
+  <h1 class="text-base text-center pt-3">
+    @if (isEdit) { Edit Product } @else { Add New Product }
+  </h1>
+
   <div class="p-[1px] w-full flex justify-center">
     <form
-      class="w-[80%] p-4 flex flex-col gap-4"
+      class="w-full sm:w-[90%] md:w-[80%] lg:w-[70%] p-4 flex flex-col gap-4"
       [formGroup]="productForm"
-      (ngSubmit)="addProduct()"
+      (ngSubmit)="isEdit ? updateProduct() : addProduct()"
     >
+      <!-- Category -->
+      <mat-form-field class="w-full">
+        <mat-label>Category</mat-label>
+        <mat-select formControlName="categoryId">
+          @for (category of categories; track category._id) {
+          <mat-option [value]="category._id">
+            {{ category.name }}
+          </mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
+
+      <!-- Brand -->
+      <mat-form-field class="w-full">
+        <mat-label>Brand</mat-label>
+        <mat-select formControlName="brandId">
+          @for (brand of brands; track brand._id) {
+          <mat-option [value]="brand._id">
+            {{ brand.name }}
+          </mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
+
       <!-- Product Name -->
       <mat-form-field class="w-full">
         <mat-label>Name</mat-label>
@@ -56,57 +83,41 @@
         </mat-error>
       </mat-form-field>
 
-      <!-- Price -->
-      <mat-form-field class="w-full">
-        <mat-label>Price</mat-label>
-        <input
-          matInput
-          type="number"
-          formControlName="price"
-          placeholder="Enter price"
-        />
-        <mat-error
-          *ngIf="
-            productForm.get('price')?.invalid &&
-            productForm.get('price')?.touched
-          "
-        >
-          Price is required.
-        </mat-error>
-      </mat-form-field>
+      <!-- Price & Discount in Row (Responsive) -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <mat-form-field class="w-full">
+          <mat-label>Price</mat-label>
+          <input
+            matInput
+            type="number"
+            formControlName="price"
+            placeholder="Enter price"
+          />
+          <mat-error
+            *ngIf="
+              productForm.get('price')?.invalid &&
+              productForm.get('price')?.touched
+            "
+          >
+            Price is required.
+          </mat-error>
+        </mat-form-field>
 
-      <!-- Discount -->
-      <mat-form-field class="w-full">
-        <mat-label>Discount</mat-label>
-        <input
-          matInput
-          type="number"
-          formControlName="discount"
-          placeholder="Enter discount"
-        />
-      </mat-form-field>
+        <mat-form-field class="w-full">
+          <mat-label>Discount</mat-label>
+          <input
+            matInput
+            type="number"
+            formControlName="discount"
+            placeholder="Enter discount"
+          />
+        </mat-form-field>
+      </div>
 
-      <!-- Category -->
-      <mat-form-field class="w-full">
-        <mat-label>Category ID</mat-label>
-        <input
-          matInput
-          formControlName="categoryId"
-          placeholder="Enter category ID"
-        />
-        <mat-error
-          *ngIf="
-            productForm.get('categoryId')?.invalid &&
-            productForm.get('categoryId')?.touched
-          "
-        >
-          Category ID is required.
-        </mat-error>
-      </mat-form-field>
       <!-- Images FormArray -->
-      <div formArrayName="images" class="flex flex-col gap-2">
+      <div formArrayName="images" class="flex flex-col gap-3">
         <div class="flex justify-between items-center">
-          <h3>Product Images</h3>
+          <h3 class="text-lg font-semibold">Product Images</h3>
           <button
             mat-raised-button
             color="primary"
@@ -116,30 +127,48 @@
             Add Image
           </button>
         </div>
-        @for (item of images.controls; track $index) {
-        <div class="flex gap-2 items-center">
-          <mat-form-field appearance="outline" class="flex-1">
-            <mat-label>Image {{ $index + 1 }}</mat-label>
-            <input
-              matInput
-              [formControlName]="$index"
-              placeholder="Enter image URL"
-            />
-          </mat-form-field>
 
-          <button
-            mat-raised-button
-            color="warn"
-            type="button"
-            (click)="removeImage($index)"
+        <div class="overflow-x-auto">
+          <table
+            class="min-w-full border border-gray-300 rounded-lg text-sm sm:text-base"
           >
-            Remove
-          </button>
+            <thead class="bg-gray-100">
+              <tr>
+                <th class="p-2 border">#</th>
+                <th class="p-2 border text-left">Image URL</th>
+                <th class="p-2 border">Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              @for (item of images.controls; track $index) {
+              <tr>
+                <td class="p-2 border text-center">{{ $index + 1 }}</td>
+                <td class="p-2 border">
+                  <mat-form-field appearance="outline" class="w-full">
+                    <mat-label>Image {{ $index + 1 }}</mat-label>
+                    <input
+                      matInput
+                      [formControlName]="$index"
+                      placeholder="Enter image URL"
+                    />
+                  </mat-form-field>
+                </td>
+                <td class="p-2 border text-center">
+                  <button
+                    mat-raised-button
+                    color="warn"
+                    type="button"
+                    (click)="removeImage($index)"
+                  >
+                    Remove
+                  </button>
+                </td>
+              </tr>
+              }
+            </tbody>
+          </table>
         </div>
-        }
       </div>
-
-      <!-- Button to add new input -->
 
       <!-- Submit -->
       <div class="flex justify-center w-full mt-4">
@@ -149,7 +178,7 @@
           type="submit"
           [disabled]="productForm.invalid"
         >
-          Save Product
+          {{ isEdit ? "Update" : "Save" }}
         </button>
       </div>
     </form>

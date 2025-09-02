@@ -6,7 +6,9 @@
     </button>
   </div>
 
-  <div class="mt-10 shadow-sm rounded-lg shadow-gray-400 p-[1px]">
+  <div
+    class="mt-10 shadow-sm rounded-lg shadow-gray-400 p-[1px] overflow-x-auto"
+  >
     <mat-form-field class="w-full">
       <mat-label>Filter</mat-label>
       <input
@@ -17,7 +19,7 @@
       />
     </mat-form-field>
 
-    <table mat-table [dataSource]="dataSource" matSort>
+    <table mat-table [dataSource]="dataSource" matSort class="w-full">
       <!-- ID Column -->
       <ng-container matColumnDef="_id">
         <th mat-header-cell *matHeaderCellDef mat-sort-header>ID</th>
@@ -29,30 +31,42 @@
         <th mat-header-cell *matHeaderCellDef mat-sort-header>Name</th>
         <td mat-cell *matCellDef="let row">{{ row.name }}</td>
       </ng-container>
-      <!-- Name Column -->
+
+      <!-- Short Description -->
       <ng-container matColumnDef="shortDescription">
         <th mat-header-cell *matHeaderCellDef mat-sort-header>
           Short Description
         </th>
-        <td mat-cell *matCellDef="let row">{{ row.shortDescription }}</td>
+        <td mat-cell *matCellDef="let row" class="truncate max-w-[150px]">
+          {{ row.shortDescription }}
+        </td>
       </ng-container>
-      <!-- Name Column -->
+
+      <!-- Description Column -->
       <ng-container matColumnDef="description">
         <th mat-header-cell *matHeaderCellDef mat-sort-header>Description</th>
-        <td mat-cell *matCellDef="let row">{{ row.description }}</td>
+        <td
+          mat-cell
+          *matCellDef="let row"
+          class="whitespace-normal break-words max-w-[250px]"
+        >
+          {{ row.description }}
+        </td>
       </ng-container>
-      <!-- Name Column -->
+
+      <!-- Price -->
       <ng-container matColumnDef="price">
         <th mat-header-cell *matHeaderCellDef mat-sort-header>Price</th>
         <td mat-cell *matCellDef="let row">{{ row.price }}</td>
       </ng-container>
-      <!-- Name Column -->
+
+      <!-- Discount -->
       <ng-container matColumnDef="discount">
         <th mat-header-cell *matHeaderCellDef mat-sort-header>Discount</th>
         <td mat-cell *matCellDef="let row">{{ row.discount }}</td>
       </ng-container>
 
-      <!-- Action Column -->
+      <!-- Action -->
       <ng-container matColumnDef="action">
         <th mat-header-cell *matHeaderCellDef>Action</th>
         <td mat-cell *matCellDef="let row">
@@ -74,11 +88,11 @@
         </td>
       </ng-container>
 
-      <!-- Header & Row Declarations -->
+      <!-- Header & Rows -->
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
       <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
 
-      <!-- Row shown when there is no matching data. -->
+      <!-- No data row -->
       <tr class="mat-row" *matNoDataRow>
         <td class="mat-cell" colspan="5">
           No data matching the filter "{{ input.value }}"
