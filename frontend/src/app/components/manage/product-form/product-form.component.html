@@ -37,12 +37,10 @@
       <mat-form-field class="w-full">
         <mat-label>Name</mat-label>
         <input matInput formControlName="name" placeholder="Ex. Laptop" />
-        <mat-error
-          *ngIf="
-            productForm.get('name')?.invalid && productForm.get('name')?.touched
-          "
-        >
-          Name is required (min 5 characters).
+        <mat-error>
+          @if (productForm.get('name')?.invalid &&
+          productForm.get('name')?.touched) { Name is required (min 5
+          characters). }
         </mat-error>
       </mat-form-field>
 
@@ -54,13 +52,10 @@
           formControlName="shortDescription"
           placeholder="Write short description"
         />
-        <mat-error
-          *ngIf="
-            productForm.get('shortDescription')?.invalid &&
-            productForm.get('shortDescription')?.touched
-          "
-        >
-          Short description is required (min 10 characters).
+        <mat-error>
+          @if (productForm.get('shortDescription')?.invalid &&
+          productForm.get('shortDescription')?.touched) { Short description is
+          required (min 10 characters). }
         </mat-error>
       </mat-form-field>
 
@@ -73,17 +68,14 @@
           placeholder="Write description"
           rows="5"
         ></textarea>
-        <mat-error
-          *ngIf="
-            productForm.get('description')?.invalid &&
-            productForm.get('description')?.touched
-          "
-        >
-          Description is required (min 50 characters).
+        <mat-error>
+          @if (productForm.get('description')?.invalid &&
+          productForm.get('description')?.touched) { Description is required
+          (min 50 characters). }
         </mat-error>
       </mat-form-field>
 
-      <!-- Price & Discount in Row (Responsive) -->
+      <!-- Price & Discount -->
       <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <mat-form-field class="w-full">
           <mat-label>Price</mat-label>
@@ -93,13 +85,9 @@
             formControlName="price"
             placeholder="Enter price"
           />
-          <mat-error
-            *ngIf="
-              productForm.get('price')?.invalid &&
-              productForm.get('price')?.touched
-            "
-          >
-            Price is required.
+          <mat-error>
+            @if (productForm.get('price')?.invalid &&
+            productForm.get('price')?.touched) { Price is required. }
           </mat-error>
         </mat-form-field>
 
