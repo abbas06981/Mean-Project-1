@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { CategoryService } from '../../service/category.service';
+import { Category } from '../../types/category';
 
 @Component({
   selector: 'app-header',
@@ -7,4 +9,12 @@ import { Component } from '@angular/core';
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss',
 })
-export class HeaderComponent {}
+export class HeaderComponent {
+  categoryService = inject(CategoryService);
+  categoryList: Category[] = [];
+  ngOnInit() {
+    this.categoryService.getCategoryList().subscribe((data) => {
+      this.categoryList = data as Category[];
+    });
+  }
+}

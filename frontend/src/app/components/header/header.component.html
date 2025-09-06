@@ -19,11 +19,11 @@
   <!-- Second Row -->
   <nav class="header-bottom">
     <ul>
-      <li><a href="/category/electronics">Electronics</a></li>
-      <li><a href="/category/fashion">Fashion</a></li>
-      <li><a href="/category/home">Home</a></li>
-      <li><a href="/category/books">Books</a></li>
-      <li><a href="/category/sports">Sports</a></li>
+      @for (item of categoryList; track $index) {
+      <li>
+        <a href="#">{{ item.name }}</a>
+      </li>
+      }
     </ul>
   </nav>
 </header>

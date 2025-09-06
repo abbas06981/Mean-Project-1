@@ -15,7 +15,9 @@ const productsSchema = new Schema({
     brandId: {
         type: Schema.Types.ObjectId,
         ref: "brand"
-    }
+    },
+    isFeatured: Boolean,
+    isNew: Boolean
 
 });
 const Products = mongoose.model("products", productsSchema);

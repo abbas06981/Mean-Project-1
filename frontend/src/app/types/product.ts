@@ -8,4 +8,6 @@ export interface Product {
   images: string[];
   categoryId: string;
   brandId: string; // ObjectId will come as a string in API response
+  isFeatured: Boolean;
+  isNew: Boolean;
 }
