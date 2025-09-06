@@ -70,11 +70,37 @@ const updateProduct = async (req, res) => {
 };
 
 
+///============================Customer Routes handlers===============================
+
+
+const getNewProducts = async (req, res) => {
+    try {
+        const products = await Product.find({ isNew: true });
+        res.status(200).json(products.map(product => product.toObject()));
+    } catch (error) {
+        res.status(500).json({ message: "Error fetching new products", error });
+    }
+};
+
+const getFeaturedProducts = async (req, res) => {
+    try {
+        const products = await Product.find({ isFeatured: true });
+        res.status(200).json(products.map(product => product.toObject()));
+    } catch (error) {
+        res.status(500).json({ message: "Error fetching featured products", error });
+    }
+}
+
+
 
 module.exports = {
     addProduct,
     getAllProducts,
     getProductById,
     deleteProduct,
-    updateProduct
+    updateProduct,
+    getNewProducts,
+    getFeaturedProducts
+
+
 }

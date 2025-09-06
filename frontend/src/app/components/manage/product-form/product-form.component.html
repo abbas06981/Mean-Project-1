@@ -101,7 +101,10 @@
           />
         </mat-form-field>
       </div>
-
+      <div class="flex gap-4">
+        <mat-checkbox formControlName="isFeatured">Is Featured</mat-checkbox>
+        <mat-checkbox formControlName="isNew">Is New</mat-checkbox>
+      </div>
       <!-- Images FormArray -->
       <div formArrayName="images" class="flex flex-col gap-3">
         <div class="flex justify-between items-center">

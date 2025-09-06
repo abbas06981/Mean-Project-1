@@ -16,6 +16,7 @@ import { BrandService } from '../../../service/brand.service';
 import { ProductService } from '../../../service/product.service';
 import { Product } from '../../../types/product';
 import { ActivatedRoute, Router } from '@angular/router';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 @Component({
   selector: 'app-product-form',
@@ -26,6 +27,7 @@ import { ActivatedRoute, Router } from '@angular/router';
     MatInputModule,
     MatButtonModule,
     MatSelectModule,
+    MatCheckboxModule,
   ],
   templateUrl: './product-form.component.html',
   styleUrls: ['./product-form.component.scss'],
@@ -48,6 +50,8 @@ export class ProductFormComponent {
     images: this.formBuilder.array([]), // FormArray
     categoryId: [null, [Validators.required]],
     brandId: [null, [Validators.required]],
+    isFeatured: [false],
+    isNew: [false],
   });
 
   categories: Category[] = [];
