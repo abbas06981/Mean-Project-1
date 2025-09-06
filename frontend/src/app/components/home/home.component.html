@@ -1,1 +1,149 @@
-<p>home works!</p>
+<div class="flex flex-col w-full px-5">
+  <div class="w-full py-10">
+    <p class="text-2xl font-medium mb-4">Featured Products</p>
+
+    <div
+      class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6"
+    >
+      @for (item of featuredProductList; track $index) {
+      <article
+        class="group bg-white rounded-xl shadow shadow-slate-500 hover:shadow-md transition overflow-hidden"
+      >
+        <!-- Product Image -->
+        <div class="relative w-full aspect-[4/3] bg-gray-100 overflow-hidden">
+          <img
+            [src]="
+              item.images?.length ? item.images[0] : '/assets/placeholder.png'
+            "
+            [alt]="item.name"
+            class="w-full h-full object-fill rounded group-hover:scale-105 transition-transform duration-300"
+          />
+
+          <!-- Badges -->
+          <div class="absolute top-3 left-3 space-y-1">
+            @if (item.isNew) {
+            <span
+              class="inline-block text-xs font-semibold bg-emerald-500 text-white px-2 py-1 rounded-full"
+            >
+              New
+            </span>
+            } @if (item.isFeatured) {
+            <span
+              class="inline-block text-xs font-semibold bg-indigo-500 text-white px-2 py-1 rounded-full"
+            >
+              Featured
+            </span>
+            }
+          </div>
+        </div>
+
+        <!-- Product Info -->
+        <div class="p-4 flex flex-col gap-2">
+          <span class="text-[18px] font-medium text-gray-800 line-clamp-2">
+            {{ item.name }}
+          </span>
+          <p class="text-xs text-gray-500 line-clamp-2">
+            {{ item.shortDescription }}
+          </p>
+
+          <!-- Price + Discount -->
+          <div class="flex items-center gap-2 mt-1">
+            <span class="text-lg font-semibold text-gray-900">
+              $ {{ item.price - (item.discount || 0) }}
+            </span>
+            @if (item.discount) {
+            <span class="text-sm text-gray-400 line-through">
+              {{ item.price }}
+            </span>
+            <span class="text-xs font-medium text-red-500">
+              -{{ item.discount }}
+            </span>
+            }
+          </div>
+
+          <!-- Action Button -->
+          <button
+            class="mt-2 py-2 px-3 rounded-lg bg-indigo-600 text-white text-sm font-medium hover:bg-indigo-700 transition"
+          >
+            Add to Cart
+          </button>
+        </div>
+      </article>
+      }
+    </div>
+  </div>
+
+  <div class="w-full py-10">
+    <p class="text-2xl font-medium mb-4">New Products</p>
+
+    <div
+      class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6"
+    >
+      @for (item of newProductList; track $index) {
+      <article
+        class="group bg-white rounded-xl shadow shadow-slate-500 hover:shadow-md transition overflow-hidden"
+      >
+        <!-- Product Image -->
+        <div class="relative w-full aspect-[4/3] bg-gray-100 overflow-hidden">
+          <img
+            [src]="
+              item.images?.length ? item.images[0] : '/assets/placeholder.png'
+            "
+            [alt]="item.name"
+            class="w-full h-full object-fill rounded group-hover:scale-105 transition-transform duration-300"
+          />
+
+          <!-- Badges -->
+          <div class="absolute top-3 left-3 space-y-1">
+            @if (item.isNew) {
+            <span
+              class="inline-block text-xs font-semibold bg-emerald-500 text-white px-2 py-1 rounded-full"
+            >
+              New
+            </span>
+            } @if (item.isFeatured) {
+            <span
+              class="inline-block text-xs font-semibold bg-indigo-500 text-white px-2 py-1 rounded-full"
+            >
+              Featured
+            </span>
+            }
+          </div>
+        </div>
+
+        <!-- Product Info -->
+        <div class="p-4 flex flex-col gap-2">
+          <span class="text-[18px] font-medium text-gray-800 line-clamp-2">
+            {{ item.name }}
+          </span>
+          <p class="text-xs text-gray-500 line-clamp-2">
+            {{ item.shortDescription }}
+          </p>
+
+          <!-- Price + Discount -->
+          <div class="flex items-center gap-2 mt-1">
+            <span class="text-lg font-semibold text-gray-900">
+              $ {{ item.price - (item.discount || 0) }}
+            </span>
+            @if (item.discount) {
+            <span class="text-sm text-gray-400 line-through">
+              {{ item.price }}
+            </span>
+            <span class="text-xs font-medium text-red-500">
+              -{{ item.discount }}
+            </span>
+            }
+          </div>
+
+          <!-- Action Button -->
+          <button
+            class="mt-2 py-2 px-3 rounded-lg bg-indigo-600 text-white text-sm font-medium hover:bg-indigo-700 transition"
+          >
+            Add to Cart
+          </button>
+        </div>
+      </article>
+      }
+    </div>
+  </div>
+</div>
