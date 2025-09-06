@@ -38,14 +38,14 @@
       button {
         padding: 8px 16px;
         border: none;
-        background: #f1c40f;
-        color: #2c3e50;
+        background: #09d3f2;
+        color: #14171a;
         cursor: pointer;
         border-radius: 0 4px 4px 0;
         font-weight: bold;
 
         &:hover {
-          background: #d4ac0d;
+          background: #09d3f2;
         }
       }
     }
@@ -56,14 +56,14 @@
       font-weight: 500;
 
       &:hover {
-        color: #f1c40f;
+        color: #09bcf2;
       }
     }
   }
 
   /* Second Row */
   .header-bottom {
-    background: #f1c40f; // yellow bar
+    background: #09bcf2; // yellow bar
     padding: 8px 0;
 
     ul {
