@@ -2,11 +2,12 @@ import { Component, inject } from '@angular/core';
 
 import { CustomerService } from '../../service/customer.service';
 import { Product } from '../../types/product';
+import { ProductCardComponent } from '../product-card/product-card.component';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [],
+  imports: [ProductCardComponent],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss',
 })
