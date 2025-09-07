@@ -4,7 +4,7 @@
     <owl-carousel-o [options]="customOptions">
       @for (item of bannerImages; track $index) {
       <ng-template carouselSlide>
-        <div class="relative w-full h-96 rounded-lg">
+        <a href="#" class="relative w-full h-96 rounded-lg block">
           <img
             [src]="
               item.images?.length ? item.images[0] : '/assets/placeholder.png'
@@ -21,7 +21,7 @@
               {{ item.name }}
             </p>
           </div>
-        </div>
+        </a>
       </ng-template>
       }
     </owl-carousel-o>
