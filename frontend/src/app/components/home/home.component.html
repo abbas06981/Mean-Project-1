@@ -1,7 +1,35 @@
 <div class="flex flex-col w-full px-5">
-  <div class="w-full py-10">
-    <p class="text-2xl font-medium mb-4">Featured Products</p>
+  <!-- Carousel -->
+  <div class="w-full pt-5">
+    <owl-carousel-o [options]="customOptions">
+      @for (item of bannerImages; track $index) {
+      <ng-template carouselSlide>
+        <div class="relative w-full h-96 rounded-lg">
+          <img
+            [src]="
+              item.images?.length ? item.images[0] : '/assets/placeholder.png'
+            "
+            [alt]="item.name"
+            class="w-full h-full object-cover p-3 rounded-xl group-hover:scale-105 transition-transform duration-500"
+          />
 
+          <!-- Overlay text (optional) -->
+          <div
+            class="absolute inset-0 rounded-xl p-3 bg-black/20 flex items-center justify-center"
+          >
+            <p class="text-white text-lg sm:text-3xl font-bold drop-shadow-lg">
+              {{ item.name }}
+            </p>
+          </div>
+        </div>
+      </ng-template>
+      }
+    </owl-carousel-o>
+  </div>
+
+  <!-- Featured Products -->
+  <div class="w-full py-10">
+    <p class="text-2xl font-semibold mb-4 border-b pb-2">Featured Products</p>
     <div
       class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6"
     >
@@ -11,9 +39,9 @@
     </div>
   </div>
 
+  <!-- New Products -->
   <div class="w-full py-10">
-    <p class="text-2xl font-medium mb-4">New Products</p>
-
+    <p class="text-2xl font-semibold mb-4 border-b pb-2">New Products</p>
     <div
       class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6"
     >
