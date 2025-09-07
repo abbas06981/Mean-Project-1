@@ -4,18 +4,21 @@
     <owl-carousel-o [options]="customOptions">
       @for (item of bannerImages; track $index) {
       <ng-template carouselSlide>
-        <a href="#" class="relative w-full h-96 rounded-lg block">
+        <a
+          [routerLink]="['/products', item._id]"
+          class="relative w-full p-1 h-96 block"
+        >
           <img
             [src]="
               item.images?.length ? item.images[0] : '/assets/placeholder.png'
             "
             [alt]="item.name"
-            class="w-full h-full object-cover p-0.5 rounded-xl group-hover:scale-105 transition-transform duration-500"
+            class="w-full h-full object-center rounded-xl group-hover:scale-105 transition-transform duration-500"
           />
 
           <!-- Overlay text (optional) -->
           <div
-            class="absolute inset-0 rounded-xlp-0.5 bg-black/10 flex items-center justify-center"
+            class="absolute inset-0 rounded-xl p-0.5 bg-black/10 flex items-center justify-center"
           >
             <p class="text-white text-lg sm:text-2xl font-bold drop-shadow-lg">
               {{ item.name }}

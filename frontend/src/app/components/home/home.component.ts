@@ -3,11 +3,12 @@ import { CarouselModule, OwlOptions } from 'ngx-owl-carousel-o';
 import { CustomerService } from '../../service/customer.service';
 import { Product } from '../../types/product';
 import { ProductCardComponent } from '../product-card/product-card.component';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [ProductCardComponent, CarouselModule],
+  imports: [ProductCardComponent, CarouselModule, RouterLink],
 
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss',

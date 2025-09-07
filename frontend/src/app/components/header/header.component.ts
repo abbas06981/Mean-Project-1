@@ -1,20 +1,36 @@
 import { Component, inject } from '@angular/core';
 import { CategoryService } from '../../service/category.service';
 import { Category } from '../../types/category';
-
+import { FormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [],
+  imports: [FormsModule],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss',
 })
 export class HeaderComponent {
   categoryService = inject(CategoryService);
   categoryList: Category[] = [];
+  searchQuery?: string;
+  router = inject(Router);
+
   ngOnInit() {
     this.categoryService.getCategoryList().subscribe((data) => {
       this.categoryList = data as Category[];
     });
+  }
+
+  onSearch() {
+    if (!this.searchQuery) return; // ✅ Prevent undefined or empty
+
+    if (this.searchQuery) {
+      this.router.navigateByUrl(`/products?search=${this.searchQuery}`);
+    }
+  }
+  searchCategory(id: string | undefined) {
+    if (!id) return;
+    this.router.navigateByUrl(`/products?search=${id}`);
   }
 }

@@ -2,16 +2,20 @@
   <!-- First Row -->
   <div class="header-top">
     <!-- Logo -->
-    <div class="logo">MyShop</div>
+    <div class="logo cursor-pointer text-2xl font-bold">
+      <a href="/" class="transition">MyShop</a>
+    </div>
 
     <!-- Search -->
     <div class="search-box">
       <input
         type="text"
+        [(ngModel)]="searchQuery"
         placeholder="Search for products..."
         class="text-black"
+        (keyup.enter)="onSearch()"
       />
-      <button>🔍</button>
+      <button (click)="onSearch()">🔍</button>
     </div>
 
     <!-- Profile -->
@@ -22,10 +26,15 @@
 
   <!-- Second Row -->
   <nav class="header-bottom">
-    <ul>
+    <ul class="flex gap-4">
       @for (item of categoryList; track $index) {
       <li>
-        <a href="#">{{ item.name }}</a>
+        <span
+          class="cursor-pointer text-blue-600 hover:text-blue-800 hover:underline transition"
+          (click)="searchCategory(item._id!)"
+        >
+          {{ item.name }}
+        </span>
       </li>
       }
     </ul>

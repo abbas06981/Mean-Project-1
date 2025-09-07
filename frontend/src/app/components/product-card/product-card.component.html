@@ -1,12 +1,13 @@
 <article
-  class="group bg-white rounded-xl shadow shadow-slate-500 hover:shadow-md transition overflow-hidden flex flex-col h-full"
+  [routerLink]="['/products', item._id]"
+  class="group bg-white rounded-xl cursor-pointer shadow shadow-slate-500 hover:shadow-md transition overflow-hidden flex flex-col h-full"
 >
   <!-- Product Image -->
   <div class="relative w-full aspect-[4/3] bg-gray-100 overflow-hidden">
     <img
       [src]="item.images?.length ? item.images[0] : '/assets/placeholder.png'"
       [alt]="item.name"
-      class="w-full h-full object-fill rounded group-hover:scale-105 transition-transform duration-300"
+      class="w-full h-full object-center rounded group-hover:scale-105 transition-transform duration-300"
     />
 
     <!-- Badges -->
