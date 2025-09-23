@@ -2,11 +2,11 @@ import { Component, inject } from '@angular/core';
 import { CategoryService } from '../../service/category.service';
 import { Category } from '../../types/category';
 import { FormsModule } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [FormsModule],
+  imports: [FormsModule, RouterLink],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss',
 })

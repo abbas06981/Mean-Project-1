@@ -7,6 +7,7 @@ const categoryRouter = require('./routes/category')
 const brandRouter = require('./routes/brand')
 const productRouter = require('./routes/product')
 const customerRouter = require('./routes/customers')
+const authRoutes = require('./routes/auth')
 
 
 const app = express();
@@ -21,6 +22,9 @@ async function connectDB() {
     })
 }
 connectDB().then(() => console.log('Connected to DB')).catch(err => console.log(err))
+
+// ========== Auth Routes ===========
+app.use('/auth', authRoutes)
 
 //=================Routes path====================
 
