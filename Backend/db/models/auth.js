@@ -1,6 +1,7 @@
 const User = require("../schemas/users");
 const bcrypt = require("bcryptjs");
-
+const jwt = require("jsonwebtoken");
+const JWT_SECRET = "ThisIsMySecretKey";
 const registerUser = async (req, res) => {
     try {
         const { name, email, password } = req.body;
@@ -60,6 +61,52 @@ const registerUser = async (req, res) => {
     }
 };
 
+// =================== LOGIN ===================
+const loginUser = async (req, res) => {
+    try {
+        const { email, password } = req.body;
+
+        // Validate input
+        if (!email || !password) {
+            return res.status(400).json({ message: "Email and password are required" });
+        }
+
+        // Find user by email
+        const user = await User.findOne({ email });
+        if (!user) {
+            return res.status(400).json({ message: "Invalid email or password" });
+        }
+
+        // Compare password
+        const isMatch = await bcrypt.compare(password, user.password);
+        if (!isMatch) {
+            return res.status(400).json({ message: "Invalid email or password" });
+        }
+
+        // Create JWT token
+        const token = jwt.sign(
+            { id: user._id, email: user.email, isAdmin: user.isAdmin },
+            JWT_SECRET,
+            { expiresIn: "1h" }
+        );
+
+        res.json({
+            message: "Login successful",
+            token,
+            user: {
+                id: user._id,
+                name: user.name,
+                email: user.email,
+                isAdmin: user.isAdmin,
+            },
+        });
+    } catch (error) {
+        console.error(error.message);
+        res.status(500).json({ message: "Error logging in" });
+    }
+};
+
 module.exports = {
     registerUser,
+    loginUser
 };
