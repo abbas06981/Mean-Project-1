@@ -2,6 +2,11 @@ const express = require('express');
 const cors = require('cors');
 const mongoose = require('mongoose');
 require("dotenv").config();
+const { adminMiddleware, authMiddleware } = require("./middleware/authMiddleware")
+
+
+
+
 //=================Routes====================
 const categoryRouter = require('./routes/category')
 const brandRouter = require('./routes/brand')
@@ -11,15 +16,13 @@ const authRoutes = require('./routes/auth')
 
 
 const app = express();
-const port = 3000;
+const port = process.env.PORT || 5000;
 app.use(express.json())
 app.use(cors())
 
 //=================DB Connection====================
 async function connectDB() {
-    await mongoose.connect('mongodb://127.0.0.1:27017/', {
-        dbName: 'eCommerce_Project1'
-    })
+    await mongoose.connect(process.env.MONGO_URI)
 }
 connectDB().then(() => console.log('Connected to DB')).catch(err => console.log(err))
 
@@ -28,12 +31,12 @@ app.use('/auth', authRoutes)
 
 //=================Routes path====================
 
-app.use('/category', categoryRouter)
-app.use('/brand', brandRouter)
-app.use('/product', productRouter)
+app.use('/category', authMiddleware, adminMiddleware, categoryRouter)
+app.use('/brand', authMiddleware, adminMiddleware, brandRouter)
+app.use('/product', authMiddleware, adminMiddleware, productRouter)
 
 //=================Public Routes====================
-app.use('/customer', customerRouter)
+app.use('/customer', authMiddleware, customerRouter)
 
 
 //=================Server====================

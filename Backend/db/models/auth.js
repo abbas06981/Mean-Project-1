@@ -1,7 +1,7 @@
 const User = require("../schemas/users");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
-const JWT_SECRET = "ThisIsMySecretKey";
+const JWT_SECRET = process.env.JWT_SECRET;
 const registerUser = async (req, res) => {
     try {
         const { name, email, password } = req.body;

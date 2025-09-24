@@ -1,6 +1,6 @@
 const jwt = require("jsonwebtoken");
 
-const JWT_SECRET = "ThisIsMySecretKey"; // ⚠️ use .env in real projects
+const JWT_SECRET = process.env.JWT_SECRET; // ⚠️ use .env in real projects
 
 const authMiddleware = (req, res, next) => {
     try {
@@ -35,4 +35,20 @@ const authMiddleware = (req, res, next) => {
     }
 };
 
-module.exports = authMiddleware;
+const adminMiddleware = (req, res, next) => {
+    if (!req.user) {
+        return res.status(401).json({ message: "Not authorized, no user info" });
+    }
+
+    if (!req.user.isAdmin) {
+        return res.status(403).json({ message: "Access denied, admin only" });
+    }
+
+    next();
+};
+
+
+module.exports = {
+    authMiddleware,
+    adminMiddleware
+};
