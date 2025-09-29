@@ -26,17 +26,21 @@ async function connectDB() {
 }
 connectDB().then(() => console.log('Connected to DB')).catch(err => console.log(err))
 
-// ========== Auth Routes ===========
-app.use('/auth', authRoutes)
 
-//=================Routes path====================
+
+//=================admin Routes path====================
 
 app.use('/category', authMiddleware, adminMiddleware, categoryRouter)
 app.use('/brand', authMiddleware, adminMiddleware, brandRouter)
 app.use('/product', authMiddleware, adminMiddleware, productRouter)
 
-//=================Public Routes====================
+//=================customer Routes path====================
 app.use('/customer', authMiddleware, customerRouter)
+
+// ========== Auth Routes ===========
+app.use('/auth', authRoutes)
+
+
 
 
 //=================Server====================
