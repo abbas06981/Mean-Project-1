@@ -2,7 +2,7 @@ const express = require('express');
 const cors = require('cors');
 const mongoose = require('mongoose');
 require("dotenv").config();
-const { adminMiddleware, authMiddleware } = require("./middleware/authMiddleware")
+const { adminMiddleware, authMiddleware } = require("./middleware/authMiddle")
 
 
 
