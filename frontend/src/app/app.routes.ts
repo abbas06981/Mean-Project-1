@@ -8,6 +8,8 @@ import { ProductComponent } from './components/manage/product/product.component'
 import { ProductFormComponent } from './components/manage/product-form/product-form.component';
 import { ProductListComponent } from './components/product-list/product-list.component';
 import { ProductDetailComponent } from './components/product-detail/product-detail.component';
+import { SignInComponent } from './components/sign-in/sign-in.component';
+import { RegisterComponent } from './components/register/register.component';
 
 export const routes: Routes = [
   // ===================Private Routes====================
@@ -60,5 +62,15 @@ export const routes: Routes = [
   {
     path: 'products/:id',
     component: ProductDetailComponent,
+  },
+
+  //====================== Auth Routes ==========================
+  {
+    path: 'login',
+    component: SignInComponent,
+  },
+  {
+    path: 'register',
+    component: RegisterComponent,
   },
 ];
