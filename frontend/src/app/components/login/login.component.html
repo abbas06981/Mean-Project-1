@@ -1,13 +1,9 @@
 <div class="min-h-screen flex items-center justify-center bg-gray-100">
   <div class="bg-white p-8 rounded-2xl shadow-lg w-full max-w-md">
-    <h2 class="text-2xl font-bold text-center text-gray-800 mb-6">Sign Up</h2>
+    <h2 class="text-2xl font-bold text-center text-gray-800 mb-6">Sign In</h2>
 
     <!-- ✅ Added [formGroup] for reactive form -->
-    <form
-      [formGroup]="registerForm"
-      (ngSubmit)="registerUser()"
-      class="space-y-5"
-    >
+    <form [formGroup]="registerForm" (ngSubmit)="loginUser()" class="space-y-5">
       <!-- Name -->
       <mat-form-field class="w-full">
         <mat-label>Name</mat-label>

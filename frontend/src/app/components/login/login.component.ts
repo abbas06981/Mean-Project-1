@@ -6,13 +6,13 @@ import { HttpClient } from '@angular/common/http';
 import { AuthService } from '../../service/auth.service';
 
 @Component({
-  selector: 'app-register',
+  selector: 'app-login',
   standalone: true,
   imports: [MatInputModule, MatButtonModule, ReactiveFormsModule],
-  templateUrl: './register.component.html',
-  styleUrls: ['./register.component.scss'],
+  templateUrl: './login.component.html',
+  styleUrl: './login.component.scss',
 })
-export class RegisterComponent {
+export class LoginComponent {
   formBuilder = inject(FormBuilder);
   authService = inject(AuthService);
   http = inject(HttpClient);
@@ -24,7 +24,7 @@ export class RegisterComponent {
     confirmPassword: ['', [Validators.required, Validators.minLength(8)]],
   });
 
-  registerUser() {
+  loginUser() {
     if (this.registerForm.invalid) {
       this.registerForm.markAllAsTouched();
       console.warn('Form is invalid');

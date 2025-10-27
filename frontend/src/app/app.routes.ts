@@ -10,6 +10,7 @@ import { ProductListComponent } from './components/product-list/product-list.com
 import { ProductDetailComponent } from './components/product-detail/product-detail.component';
 import { SignInComponent } from './components/sign-in/sign-in.component';
 import { RegisterComponent } from './components/register/register.component';
+import { LoginComponent } from './components/login/login.component';
 
 export const routes: Routes = [
   // ===================Private Routes====================
@@ -67,7 +68,7 @@ export const routes: Routes = [
   //====================== Auth Routes ==========================
   {
     path: 'login',
-    component: SignInComponent,
+    component: LoginComponent,
   },
   {
     path: 'register',
