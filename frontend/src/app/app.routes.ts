@@ -11,58 +11,71 @@ import { ProductDetailComponent } from './components/product-detail/product-deta
 import { SignInComponent } from './components/sign-in/sign-in.component';
 import { RegisterComponent } from './components/register/register.component';
 import { LoginComponent } from './components/login/login.component';
+import { AuthGuard } from './core/auth_guard';
 
 export const routes: Routes = [
   // ===================Private Routes====================
   {
     path: 'admin/categories',
     component: CategoryComponent,
+    canActivate: [AuthGuard],
   },
   {
     path: 'admin/categories/add',
     component: CategoryFormComponent,
+    canActivate: [AuthGuard],
   },
   {
     path: 'admin/categories/:id',
     component: CategoryFormComponent,
+    canActivate: [AuthGuard],
   },
   {
     path: 'admin/brand',
     component: BrandsComponent,
+    canActivate: [AuthGuard],
   },
   {
     path: 'admin/brand/add',
     component: BrandsFormComponent,
+    canActivate: [AuthGuard],
   },
   {
     path: 'admin/brand/:id',
     component: BrandsFormComponent,
+    canActivate: [AuthGuard],
   },
   {
     path: 'admin/products',
     component: ProductComponent,
+    canActivate: [AuthGuard],
   },
   {
     path: 'admin/products/add',
     component: ProductFormComponent,
+    canActivate: [AuthGuard],
   },
   {
     path: 'admin/products/:id',
     component: ProductFormComponent,
+    canActivate: [AuthGuard],
   },
 
   // =======================Public Routes=====================
   {
     path: '',
     component: HomeComponent,
+    canActivate: [AuthGuard],
   },
   {
     path: 'products',
     component: ProductListComponent,
+    canActivate: [AuthGuard],
   },
   {
     path: 'products/:id',
     component: ProductDetailComponent,
+    canActivate: [AuthGuard],
   },
 
   //====================== Auth Routes ==========================

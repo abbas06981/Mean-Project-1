@@ -4,6 +4,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { FormBuilder, Validators, ReactiveFormsModule } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { AuthService } from '../../service/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -16,6 +17,7 @@ export class RegisterComponent {
   formBuilder = inject(FormBuilder);
   authService = inject(AuthService);
   http = inject(HttpClient);
+  router = inject(Router);
 
   registerForm = this.formBuilder.group({
     name: ['', [Validators.required, Validators.minLength(5)]],
@@ -37,6 +39,7 @@ export class RegisterComponent {
       .registerUser(value.name ?? '', value.email ?? '', value.password ?? '')
       .subscribe((result) => {
         console.log(result);
+        this.router.navigateByUrl('/login');
       });
   }
 }

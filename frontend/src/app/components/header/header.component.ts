@@ -3,6 +3,7 @@ import { CategoryService } from '../../service/category.service';
 import { Category } from '../../types/category';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
+import { AuthService } from '../../service/auth.service';
 @Component({
   selector: 'app-header',
   standalone: true,
@@ -15,6 +16,7 @@ export class HeaderComponent {
   categoryList: Category[] = [];
   searchQuery?: string;
   router = inject(Router);
+  authService = inject(AuthService);
 
   ngOnInit() {
     this.categoryService.getCategoryList().subscribe((data) => {

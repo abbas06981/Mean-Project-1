@@ -16,4 +16,25 @@ export class AuthService {
       password,
     });
   }
+  loginUser(email: string, password: string): Observable<any> {
+    return this.http.post(environment.apiUrl + '/auth/login', {
+      email,
+      password,
+    });
+  }
+
+  get isLoggedIn() {
+    const token = localStorage.getItem('token');
+    return !!token; // double negation returns true if token exists, false otherwise
+  }
+
+  get userName() {
+    const userData = localStorage.getItem('user');
+    try {
+      return userData ? JSON.parse(userData)?.name ?? null : null;
+    } catch (error) {
+      console.error('Error parsing user data:', error);
+      return null;
+    }
+  }
 }
