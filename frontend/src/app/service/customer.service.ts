@@ -15,5 +15,7 @@ export class CustomerService {
       environment.apiUrl + '/customer/home/featured-products'
     );
   }
-  constructor() {}
+  getCategoriesList() {
+    return this.http.get(environment.apiUrl + '/home/categories');
+  }
 }

@@ -35,7 +35,7 @@ app.use('/brand', authMiddleware, adminMiddleware, brandRouter)
 app.use('/product', authMiddleware, adminMiddleware, productRouter)
 
 //=================customer Routes path====================
-app.use('/customer', authMiddleware, customerRouter)
+app.use('/customer', customerRouter)
 
 // ========== Auth Routes ===========
 app.use('/auth', authRoutes)

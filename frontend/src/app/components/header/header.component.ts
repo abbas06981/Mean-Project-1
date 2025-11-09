@@ -4,6 +4,7 @@ import { Category } from '../../types/category';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../../service/auth.service';
+import { CustomerService } from '../../service/customer.service';
 @Component({
   selector: 'app-header',
   standalone: true,
@@ -12,18 +13,22 @@ import { AuthService } from '../../service/auth.service';
   styleUrl: './header.component.scss',
 })
 export class HeaderComponent {
-  categoryService = inject(CategoryService);
+  categoryService = inject(CustomerService);
   categoryList: Category[] = [];
   searchQuery?: string;
   router = inject(Router);
   authService = inject(AuthService);
 
   ngOnInit() {
-    this.categoryService.getCategoryList().subscribe((data) => {
+    this.categoryService.getCategoriesList().subscribe((data) => {
       this.categoryList = data as Category[];
     });
   }
-
+  logout() {
+    localStorage.removeItem('token');
+    localStorage.removeItem('user');
+    this.router.navigateByUrl('/login');
+  }
   onSearch() {
     if (!this.searchQuery) return; // ✅ Prevent undefined or empty
 
