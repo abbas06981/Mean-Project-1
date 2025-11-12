@@ -25,8 +25,7 @@ export class HeaderComponent {
     });
   }
   logout() {
-    localStorage.removeItem('token');
-    localStorage.removeItem('user');
+    this.authService.logoutUser();
     this.router.navigateByUrl('/login');
   }
   onSearch() {
