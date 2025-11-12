@@ -12,9 +12,15 @@ import { SignInComponent } from './components/sign-in/sign-in.component';
 import { RegisterComponent } from './components/register/register.component';
 import { LoginComponent } from './components/login/login.component';
 import { AuthGuard } from './core/auth_guard';
+import { DashboardComponent } from './components/manage/dashboard/dashboard.component';
 
 export const routes: Routes = [
   // ===================Private Routes====================
+  {
+    path: 'admin/Dashboard',
+    component: DashboardComponent,
+    canActivate: [AuthGuard],
+  },
   {
     path: 'admin/categories',
     component: CategoryComponent,

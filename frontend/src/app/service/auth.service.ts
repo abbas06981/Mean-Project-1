@@ -37,6 +37,14 @@ export class AuthService {
       return null;
     }
   }
+  get isAdmin() {
+    const user = localStorage.getItem('user');
+    if (user) {
+      const parsedUser = JSON.parse(user);
+      return parsedUser.isAdmin === true;
+    }
+    return false;
+  }
   logoutUser() {
     localStorage.removeItem('token');
     localStorage.removeItem('user');

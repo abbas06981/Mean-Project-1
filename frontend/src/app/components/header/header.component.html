@@ -21,11 +21,19 @@
     <!-- Profile -->
     <div class="profile">
       <a href="/profile">{{ authService.userName }}</a>
+      @if (this.authService.isAdmin){
+      <a href="/admin/Dashboard" class="ml-5">Dashboard</a>
+      } @if(this.authService.isLoggedIn){
       <a href="/login" (click)="logout()" class="ml-5">LogOut</a>
+      } @else {
+      <a href="/login" class="ml-5">LogIn</a>
+      <a href="/register" class="ml-5">register</a>
+      }
     </div>
   </div>
 
   <!-- Second Row -->
+  @if (this.authService.isLoggedIn){
   <nav class="header-bottom">
     <ul class="flex gap-4">
       @for (item of categoryList; track $index) {
@@ -40,4 +48,5 @@
       }
     </ul>
   </nav>
+  }
 </header>
